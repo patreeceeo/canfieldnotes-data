@@ -1,6 +1,30 @@
-import { DocFile, LessonFile, LessonLookup, ResourceMetadata } from "./types";
+export interface Section {
+  depth: string;
+  value: string;
+  children?: Section[];
+}
 
-export { DocFile, LessonFile, LessonLookup, ResourceMetadata };
+export interface LessonLookup {
+  lessonName: string;
+  internalName: string;
+}
+
+export interface ResourceMetadata {
+  title: string,
+  description: string,
+  resource: string
+}
+
+export interface DocFile {
+  toc: Section[];
+  default: string;
+}
+
+export interface LessonFile {
+  lesson?: any;
+  solved?: any;
+  markdown?: string;
+}
 
 function noThrow<T>(x: Promise<T>): Promise<T | undefined> {
   return x.catch(() => undefined);
