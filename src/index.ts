@@ -30,8 +30,12 @@ function noThrow<T>(x: Promise<T>): Promise<T | undefined> {
   return x.catch(() => undefined);
 }
 
-export async function getApi(lang: string): Promise<DocFile | undefined> {
-  return await noThrow(import(`../langs/${lang}/api/api.md`));
+export async function getIndex(lang: string): Promise<DocFile[]> {
+  const paths = [
+    `../langs/${lang}/r3.mdx`,
+  ]
+  const promises = paths.map((path) => import(path))
+  return await Promise.all(promises);
 }
 
 export async function getDoc(

@@ -35,6 +35,7 @@
     "prepare": "patch-package"
   },
   "dependencies": {
+    "rehype-raw": "^6.1.1",
     "solid-jsx": "^0.9.1"
   }
 }
