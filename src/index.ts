@@ -31,11 +31,9 @@ function noThrow<T>(x: Promise<T>): Promise<T | undefined> {
 }
 
 export async function getIndex(lang: string): Promise<DocFile[]> {
-  const paths = [
-    `../langs/${lang}/r3.mdx`,
-  ]
-  const promises = paths.map((path) => import(path))
-  return await Promise.all(promises);
+  return await Promise.all([
+    import(`../langs/${lang}/r3.mdx`)
+  ]);
 }
 
 export async function getDoc(
