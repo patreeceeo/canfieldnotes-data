@@ -30,17 +30,23 @@ function noThrow<T>(x: Promise<T>): Promise<T | undefined> {
   return x.catch(() => undefined);
 }
 
-export async function getIndex(lang: string): Promise<DocFile[]> {
+export interface IndexItem {
+  resource?: string;
+  title?: string;
+  description: string;
+  lastUpdate?: string;
+}
+export async function getIndex(lang: string): Promise<Array<IndexItem>> {
   return await Promise.all([
-    import(`../langs/${lang}/r3.mdx`)
+    import(`../langs/${lang}/index.json`)
   ]);
 }
 
-export async function getDoc(
+export async function getDocFile(
   lang: string,
-  resource?: string
-): Promise<DocFile | undefined> {
-  return await noThrow(import(`../langs/${lang}/guides/${resource}.md`));
+  resource: string
+): Promise<DocFile> {
+  return await import(`../langs/${lang}/n/${resource}.mdx`);
 }
 
 export async function getGuideDirectory(
